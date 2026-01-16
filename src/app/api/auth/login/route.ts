@@ -43,11 +43,11 @@ export async function POST(request: Request) {
       // accessToken: token, // Opcional: devolverlo para verlo en el front
     });
 
-    // 3. Seteamos la cookie FORZANDO secure: false para localhost
+    // 3. Seteamos la cookie (temporalmente no httpOnly para depurar)
     response.cookies.set({
       name: "auth_token",
       value: token,
-      httpOnly: true,
+      httpOnly: false, // <--- TEMPORAL: cambiar a false para depurar
       secure: false, // <--- CAMBIO IMPORTANTE PARA LOCALHOST
       sameSite: "lax",
       maxAge: 60 * 60 * 8,

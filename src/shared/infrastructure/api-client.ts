@@ -11,10 +11,25 @@ export async function apiFetchClient(path: string, options: RequestInit = {}) {
     ...(options.headers as Record<string, string> || {}),
   };
 
+  console.log(`🚀 Cliente: Enviando petición a ${baseUrl}${path}`);
+
+  // Fallback: intentar obtener token de localStorage si las cookies no funcionan
+  const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null;
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+    console.log(`🔑 Enviando token desde localStorage: ${token.substring(0, 10)}...`);
+  }
+
   const response = await fetch(`${baseUrl}${path}`, {
     ...options,
     headers,
+    credentials: 'include', // Importante: enviar cookies de autenticación
   });
+
+  console.log(`👀 Cliente: Cookies enviadas: ${document.cookie}`);
+  if (token) {
+    console.log(`🔑 Token desde localStorage: ${token.substring(0, 10)}...`);
+  }
 
   if (response.status === 401) {
     // Si la sesión expiró, redirigimos al login
