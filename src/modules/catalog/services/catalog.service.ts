@@ -47,4 +47,6 @@ export const catalogService = {
       method: "DELETE",
     });
   },
+  
+  
 };
