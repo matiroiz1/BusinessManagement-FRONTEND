@@ -22,4 +22,9 @@ export const catalogService = {
       body: JSON.stringify(product),
     });
   },
+
+  // Obtener todos los productos
+  getAllProducts: async (): Promise<any[]> => {
+    return await apiFetchClient("/catalog/products");
+  },
 };

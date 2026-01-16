@@ -46,17 +46,17 @@ export const ProductForm = () => {
           
           <div>
             <label className="block text-sm font-medium text-gray-700">SKU *</label>
-            <input name="sku" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="EJ: REF-001" />
+            <input name="sku" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" placeholder="EJ: REF-001" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Nombre del Producto *</label>
-            <input name="name" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Ej: Camiseta de Algodón" />
+            <input name="name" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" placeholder="Ej: Camiseta de Algodón" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Código de Barras</label>
-            <input name="barcode" onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" />
+            <input name="barcode" onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
           </div>
         </div>
 
@@ -66,7 +66,7 @@ export const ProductForm = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Tipo de Producto *</label>
-            <select name="productTypeId" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+            <select name="productTypeId" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800">
               <option value="">Seleccionar...</option>
               {types.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
             </select>
@@ -74,7 +74,7 @@ export const ProductForm = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Estado *</label>
-            <select name="productStatusId" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+            <select name="productStatusId" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800">
               <option value="">Seleccionar...</option>
               {statuses.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
@@ -82,7 +82,7 @@ export const ProductForm = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Unidad de Medida *</label>
-            <select name="unitMeasureId" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+            <select name="unitMeasureId" required onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800">
               <option value="">Seleccionar...</option>
               {units.map((u) => <option key={u.id} value={u.id}>{u.name} ({u.code})</option>)}
             </select>
@@ -97,14 +97,14 @@ export const ProductForm = () => {
               <label className="block text-sm font-medium text-gray-700">Precio de Venta *</label>
               <div className="relative mt-1">
                 <span className="absolute left-3 top-2 text-gray-500">$</span>
-                <input name="currentSalePrice" type="number" step="0.01" required onChange={handleChange} className="w-full pl-8 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" />
+                <input name="currentSalePrice" type="number" step="0.01" required onChange={handleChange} className="w-full pl-8 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
               </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Costo Actual</label>
               <div className="relative mt-1">
                 <span className="absolute left-3 top-2 text-gray-500">$</span>
-                <input name="currentCost" type="number" step="0.01" onChange={handleChange} className="w-full pl-8 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" />
+                <input name="currentCost" type="number" step="0.01" onChange={handleChange} className="w-full pl-8 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@ export const ProductForm = () => {
         {/* Descripción */}
         <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700">Descripción</label>
-            <textarea name="description" rows={3} onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" />
+            <textarea name="description" rows={3} onChange={handleChange} className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800" />
         </div>
 
       </div>

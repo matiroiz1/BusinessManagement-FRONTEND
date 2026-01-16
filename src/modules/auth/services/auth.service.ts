@@ -6,7 +6,7 @@ export const authService = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
-      credentials: "include", // Incluir cookies en la solicitud y guardarlas
+      credentials: "include", 
     });
 
     if (!response.ok) {
@@ -15,34 +15,33 @@ export const authService = {
     }
     
     const data = await response.json();
-    
-    // Fallback: guardar token en localStorage también
-    // Esto es temporal para depurar el problema de cookies
-    const token = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('auth_token='))
-      ?.split('=')[1];
-    
-    if (token) {
-      localStorage.setItem('auth_token', token);
-      console.log(' Token guardado en localStorage como fallback');
+
+    // ============================================================
+    // 🟢 MODO DESARROLLO (ACTIVO) - Fallback a LocalStorage
+    // ============================================================
+    if (typeof document !== 'undefined') {
+      const token = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('auth_token='))
+        ?.split('=')[1];
+      
+      if (token) {
+        localStorage.setItem('auth_token', token);
+        console.log('🔧 DEV: Token guardado en localStorage');
+      }
     }
-    
+
+    // ============================================================
+    // 🔒 MODO PRODUCCIÓN (COMENTADO)
+    // No hacemos nada, la cookie HttpOnly se maneja sola.
+    // ============================================================
+
     return data;
   },
 
   async logout() {
-    const response = await fetch("/api/auth/logout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include", // Incluir cookies en la solicitud
-    });
-
-    if (!response.ok) {
-      throw new Error("Error al cerrar sesión en el servidor");
-    }
-    
-    // Limpiar localStorage también
-    localStorage.removeItem('auth_token');
+    await fetch("/api/auth/logout", { method: "POST" });
+    // En DEV limpiamos localStorage también
+    if (typeof window !== 'undefined') localStorage.removeItem('auth_token');
   }
 };
