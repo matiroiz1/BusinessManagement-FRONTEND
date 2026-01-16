@@ -27,4 +27,24 @@ export const catalogService = {
   getAllProducts: async (): Promise<any[]> => {
     return await apiFetchClient("/catalog/products");
   },
+  // 1. Obtener un producto por ID (Para cargar el formulario de edición)
+  getProductById: async (id: string) => {
+    return await apiFetchClient(`/catalog/products/${id}`);
+  },
+
+  // 2. Actualizar producto (PUT)
+  updateProduct: async (id: string, data: any) => {
+    return await apiFetchClient(`/catalog/products/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    });
+  },
+
+  // 3. Desactivar producto (DELETE)
+  // Tu backend hace un Soft Delete (active = false), pero el verbo es DELETE
+  deleteProduct: async (id: string) => {
+    return await apiFetchClient(`/catalog/products/${id}`, {
+      method: "DELETE",
+    });
+  },
 };

@@ -53,4 +53,9 @@ export const inventoryService = {
   getMovements: async (productId: string): Promise<StockMovementResponse[]> => {
     return await apiFetchClient(`/inventory/movements/by-product/${productId}`);
   },
+
+  // Obtener items con stock crítico
+  getCriticalItems: async (): Promise<any[]> => {
+    return await apiFetchClient("/inventory/stock/critical");
+  },
 };
