@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { authService } from '../services/auth.service';
+import Cookies from 'js-cookie';
 
 interface User {
   userId: string;
@@ -9,30 +9,30 @@ interface User {
 }
 
 interface AuthState {
+  token: string | null;
   user: User | null;
-  setUser: (user: User | null) => void;
-  logout: () => Promise<void>;
+  // Acciones
+  setToken: (token: string) => void;
+  setUser: (user: User) => void;
+  logout: () => void;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
+      token: null,
       user: null,
+
+      setToken: (token) => set({ token }),
       setUser: (user) => set({ user }),
-      logout: async () => {
-        try {
-          // 1. Llamamos al servicio para borrar la cookie HttpOnly
-          await authService.logout();
-        } catch (error) {
-          console.error("Logout falló en servidor, limpiando local de todos modos", error);
-        } finally {
-          // 2. Limpiamos el estado de Zustand (UI y localStorage)
-          set({ user: null });
-          // 3. Redirigimos manualmente al login
-          window.location.href = "/login";
-        }
+      
+      logout: () => {
+        set({ token: null, user: null });
+        Cookies.remove('auth_token');
       },
     }),
-    { name: 'auth-storage' }
+    {
+      name: 'auth-storage', // Persistencia en localStorage
+    }
   )
 );

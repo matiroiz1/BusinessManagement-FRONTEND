@@ -20,8 +20,13 @@ export const salesService = {
     });
   },
 
-  // Paso 2: Confirmar Venta (Congela precios y baja stock)
-  confirmSale: async (id: string): Promise<SaleResponse> => {
+  // 1. Obtener venta por ID (Para mostrar el total en la pantalla de pago)
+  getSaleById: async (id: string) => {
+    return await apiFetchClient(`/sales/${id}`);
+  },
+
+  // 2. Confirmar pago (Pasa de PENDING a CONFIRMED)
+  confirmSale: async (id: string) => {
     return await apiFetchClient(`/sales/${id}/confirm`, {
       method: "POST",
     });
